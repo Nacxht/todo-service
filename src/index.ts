@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Express } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { mongoInit } from "./config/mongo-conn.js";
