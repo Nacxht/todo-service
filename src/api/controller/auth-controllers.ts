@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { loginValidation, registerValidation } from "../validations/auth-validators.js";
 import { loginService, registerService } from "../services/auth-services.js";
-import { logger } from "../utils/winston.js";
 import { bcryptHash } from "../utils/bcrypt.js";
 import { generateJwt } from "../utils/jwt.js";
+import { errorResponser } from "../utils/err-responser.js";
 
 export const registerController = async (req: Request, res: Response) => {
 	try {
@@ -13,33 +13,12 @@ export const registerController = async (req: Request, res: Response) => {
 		await registerService(username, password);
 
 		res.status(201).json({
-			status: true,
+			status: "success",
 			message: "Registration process successfully",
 		});
 	} catch (err: any) {
-		switch (err.name) {
-			case "ValidationError":
-				res.status(422).json({
-					status: false,
-					error: { name: err.name, message: err.message },
-				});
-				break;
-
-			case "MongoServerError":
-				res.status(422).json({
-					status: false,
-					error: { name: err.name, message: err.message, code: err.code },
-				});
-				break;
-
-			default:
-				logger.error(`${err.name} - ${err.message}`);
-				res.status(500).json({
-					status: false,
-					error: { name: err.name, message: "An error occured" },
-				});
-				break;
-		}
+		const errResponse = await errorResponser(err);
+		res.status(errResponse.statusCode).json(errResponse);
 	}
 };
 
@@ -56,42 +35,7 @@ export const loginController = async (req: Request, res: Response) => {
 			token,
 		});
 	} catch (err: any) {
-		switch (err.name) {
-			case "ValidationError":
-				res.status(422).json({
-					status: false,
-					error: { name: err.name, message: err.message },
-				});
-				break;
-
-			case "MongoServerError":
-				res.status(422).json({
-					status: false,
-					error: { name: err.name, message: err.message, code: err.code },
-				});
-				break;
-
-			case "User not found":
-				res.status(404).json({
-					status: false,
-					error: { name: "CredentialError", message: err.name },
-				});
-				break;
-
-			case "Wrong password":
-				res.status(400).json({
-					status: false,
-					error: { name: "CredentialError", message: "Your password is incorrect" },
-				});
-				break;
-
-			default:
-				logger.error(`${err.name} - ${err.message}`);
-				res.status(500).json({
-					status: false,
-					error: { name: err.name, message: "An error occured" },
-				});
-				break;
-		}
+		const errResponse = await errorResponser(err);
+		res.status(errResponse.statusCode).json(errResponse);
 	}
 };

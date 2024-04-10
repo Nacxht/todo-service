@@ -1,13 +1,11 @@
 import { User } from "../models/user.js";
 import { bcryptCompare } from "../utils/bcrypt.js";
-import { logger } from "../utils/winston.js";
 
 export const registerService = async (username: string, password: string) => {
 	try {
 		const newUser = new User({ username, password });
 		await newUser.save();
 	} catch (err) {
-		logger.error("Failed to create a new user");
 		throw err;
 	}
 };
@@ -22,7 +20,6 @@ export const loginService = async (username: string, password: string) => {
 
 		return { userId: isUserExist._id };
 	} catch (err) {
-		logger.error("Login checking process failed");
 		throw err;
 	}
 };
