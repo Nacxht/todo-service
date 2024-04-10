@@ -1,6 +1,6 @@
 ## To-Do Service (API)
 
-This API is a simple API that I use to practice. I intend to build this API from the simplest version and then add new features over time (I hope so ).
+This API is a simple API that I use to practice. I intend to build this API from the simplest version and then add new features over time (I hope so).
 
 ## Features
 
@@ -33,26 +33,26 @@ This API has authentication, which includes registration and login. Here is the 
 
 **3. Coming Soon: Unit Testing**
 
-To be honest, I'm lazy to create unit testing features, because I prefer to test it using an API Tester application (I use Bruno: [https://www.usebruno.com/](https://www.usebruno.com/)).
+To be honest, I'm lazy to create unit testing features, because I prefer to test it using an API Tester application (I use [Bruno](https://www.usebruno.com/)).
 
 ## Framework & Libraries Used
 
 **1. Framework:**
 
-- Express.JS: [https://expressjs.com/](https://expressjs.com/)
+- [Express.JS](https://expressjs.com/)
 
 **2. Libraries:**
 
-- body-parser: [https://github.com/expressjs/body-parser](https://github.com/expressjs/body-parser)
-- dotenv: [https://github.com/motdotla/dotenv](https://github.com/motdotla/dotenv)
-- bcrypt: [https://github.com/kelektiv/node.bcrypt.js](https://github.com/kelektiv/node.bcrypt.js)
-- joi: [https://github.com/hapijs/joi](https://github.com/hapijs/joi)
-- jsonwebtoken: [https://github.com/auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
-- mongoose: [https://github.com/Automattic/mongoose](https://github.com/Automattic/mongoose)
-- winston: [https://github.com/winstonjs/winston](https://github.com/winstonjs/winston)
+- [body-parser](https://github.com/expressjs/body-parser)
+- [dotenv](https://github.com/motdotla/dotenv)
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+- [joi](https://github.com/hapijs/joi)
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- [mongoose](https://github.com/Automattic/mongoose)
+- [winston](https://github.com/winstonjs/winston)
 
 ## How to Install / Use This API
 
-I'm still lazy to add this .
+I'm still lazy to add this.
 
 I hope this is helpful! Let me know if you have any other questions.
