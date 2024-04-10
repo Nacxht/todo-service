@@ -8,3 +8,10 @@ export const todoCreateValidators = Joi.object({
 	title: Joi.string().min(3).max(20).lowercase().required(),
 	description: Joi.string().min(3).max(150),
 });
+
+export const todoUpdateValidators = Joi.object({
+	todoId: Joi.string().required(),
+	title: Joi.string().min(3).max(20).required(),
+	description: Joi.string().min(3).max(150).required(),
+	isComplete: Joi.boolean().required(),
+});
