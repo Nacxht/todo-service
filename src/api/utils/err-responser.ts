@@ -16,7 +16,26 @@ export const errorResponser = async (error: any) => {
 				return (errorResponseSchema = {
 					status: false,
 					statusCode: 422,
-					error: { name: `Joi${error.name}`, path: "username", message: error.details[0].message },
+					error: { name: error.name, path: "username", message: error.details[0].message },
+				});
+		}
+	} else if (
+		(error.name === "ValidationError" && error.isJoi && error.details[0].path[0] === "password") ||
+		(error.name === "ValidationError" && error.isJoi && error.details[0].path[0] === "confirmPassword")
+	) {
+		switch (error.details[0].type) {
+			case "any.only":
+				return (errorResponseSchema = {
+					status: false,
+					statusCode: 422,
+					error: { name: `Joi${error.name}`, path: "confirmPassword", message: `"Confirm Password" must match with "Password"` },
+				});
+
+			default:
+				return (errorResponseSchema = {
+					status: false,
+					statusCode: 422,
+					error: { name: `Joi${error.name}`, path: "password", message: error.details[0].message },
 				});
 		}
 	} else if (error.name === "MongoServerError") {
@@ -39,6 +58,13 @@ export const errorResponser = async (error: any) => {
 		}
 	} else {
 		switch (error.name) {
+			case "ValidationError":
+				return (errorResponseSchema = {
+					status: false,
+					statusCode: 422,
+					error: { name: `Joi${error.name}`, path: error.details[0].path[0], message: error.details[0].message },
+				});
+
 			case "User not found":
 				return (errorResponseSchema = {
 					status: false,
