@@ -12,7 +12,7 @@ export const todoIndexController = async (req: Request, res: Response) => {
 		res.status(201).json({
 			status: true,
 			message: 'Success get "Todos" data',
-			todoList: todos,
+			data: todos,
 		});
 	} catch (err: any) {
 		const errResponse = await errorResponser(err);
