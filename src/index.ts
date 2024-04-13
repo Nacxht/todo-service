@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import cors from "cors";
+// import cors from "cors";
 import bodyParser from "body-parser";
 import { mongoInit } from "./config/mongo-conn.js";
 import { routeInit } from "./api/routes/init.js";
@@ -8,7 +8,7 @@ import { logger } from "./api/utils/winston.js";
 
 const app: Express = express();
 
-app.use(cors());
+// if (["development", "local"].includes(config.server.env)) app.use(cors());
 app.use(bodyParser.json());
 
 await mongoInit();
