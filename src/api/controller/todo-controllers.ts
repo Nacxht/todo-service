@@ -40,6 +40,11 @@ export const todoDeleteController = async (req: Request, res: Response) => {
 	try {
 		const { todoId } = await todoIdValidators.validateAsync(req.body);
 		await todoDeleteService(todoId);
+
+		res.status(201).json({
+			status: true,
+			message: "Success deleted a Todo",
+		});
 	} catch (err: any) {
 		const errResponse = await errorResponser(err);
 		res.status(errResponse.statusCode).json(errResponse);
@@ -50,7 +55,13 @@ export const todoUpdateController = async (req: Request, res: Response) => {
 	try {
 		const { todoId, title, description, isComplete } = await todoUpdateValidators.validateAsync(req.body);
 		await todoUpdateService(todoId, title, description, isComplete);
-	} catch (err) {
-		//
+
+		res.status(201).json({
+			status: true,
+			message: "Success updated a Todo",
+		});
+	} catch (err: any) {
+		const errResponse = await errorResponser(err);
+		res.status(errResponse.statusCode).json(errResponse);
 	}
 };
