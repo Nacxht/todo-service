@@ -34,4 +34,4 @@ COPY --from=builder /usr/src/app/public_key.pem ./public_key.pem
 ENV PORT 3000
 EXPOSE $PORT
 
-CMD [ "node", "dist/src/index.js" ]
+CMD [ "node", "dist/index.js" ]
