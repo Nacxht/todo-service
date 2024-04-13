@@ -2,13 +2,13 @@ FROM node as builder
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
-RUN yarn install --frozen-lockfile
+RUN npm ci
 
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 # Generate RSA key pair
 RUN openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
 
-RUN yarn install --production --frozen-lockfile
+RUN npm ci --only=production
 
 COPY --from=builder /usr/src/app/dist ./dist
 
