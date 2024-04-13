@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 await mongoInit();
 routeInit(app);
 
-app.listen(config.server.port, () => {
+app.listen(config.server.port, config.server.url, () => {
 	logger.info(`Running on ENV = '${config.server.env}'`);
-	logger.info(`Server is running at "${config.server.url}${config.server.port}"`);
+	logger.info(`Server is running at "${config.server.url}:${config.server.port}"`);
 });
