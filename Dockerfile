@@ -21,11 +21,12 @@ USER node
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 RUN yarn install --production --frozen-lockfile
 
 COPY --from=builder /usr/src/app/dist ./dist
+
 # Copy RSA keys
 COPY --from=builder /usr/src/app/private_key.pem ./private_key.pem
 COPY --from=builder /usr/src/app/public_key.pem ./public_key.pem
