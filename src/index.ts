@@ -10,7 +10,7 @@ const app: Express = express();
 
 app.use(
 	cors({
-		origin: ["https://zky-todo.vercel.app", "http://localhost"],
+		origin: ["https://zky-todo.vercel.app", "http://localhost:3000"],
 	})
 );
 app.use(bodyParser.json());
