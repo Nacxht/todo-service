@@ -8,11 +8,16 @@ import { logger } from "./api/utils/winston.js";
 
 const app: Express = express();
 
-app.use(
-	cors({
-		origin: ["https://zky-todo.vercel.app", "http://localhost:3000"],
-	})
-);
+if (config.server.env === "production") {
+	app.use(
+		cors({
+			origin: ["https://zky-todo.vercel.app", "http://localhost:3000"],
+		})
+	);
+} else {
+	app.use(cors());
+}
+
 app.use(bodyParser.json());
 
 await mongoInit();
