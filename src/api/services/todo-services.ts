@@ -28,8 +28,12 @@ export const todoDeleteService = async (todoId: string) => {
 
 export const todoUpdateService = async (todoId: string, title: string, description: string, isComplete: boolean) => {
 	try {
-		//
+		await Todo.findByIdAndUpdate(todoId, {
+			title,
+			description,
+			isComplete,
+		});
 	} catch (err) {
-		//
+		throw err;
 	}
 };
