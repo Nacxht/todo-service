@@ -55,7 +55,6 @@ export const todoUpdateController = async (req: Request, res: Response) => {
 	try {
 		const { todoId, title, description, isComplete } = await todoUpdateValidators.validateAsync(req.body);
 		await todoUpdateService(todoId, title, description, isComplete);
-
 		res.status(201).json({
 			status: true,
 			message: "Success updated a Todo",
