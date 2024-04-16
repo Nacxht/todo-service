@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { todoCreateService, todoDeleteService, todoIndexService, todoUpdateService } from "../services/todo-services.js";
-import { todoCreateValidators, todoIdValidators, todoUpdateValidators } from "../validations/todo-validators.js";
+import { todoCreateValidators, todoIdValidators, todoListValidators, todoUpdateValidators } from "../validations/todo-validators.js";
 import { userIdValidation } from "../validations/auth-validators.js";
 import { errorResponser } from "../utils/err-responser.js";
 
 export const todoIndexController = async (req: Request, res: Response) => {
 	try {
-		const { userId, isComplete } = await userIdValidation.validateAsync({ userId: req.user.userId, isComplete: req.body.isComplete });
+		const { userId, isComplete } = await todoListValidators.validateAsync({ userId: req.user.userId, isComplete: req.query.isComplete });
 		const todos = await todoIndexService(userId, isComplete);
 
 		res.status(201).json({
