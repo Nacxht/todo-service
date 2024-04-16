@@ -4,14 +4,13 @@ import { UserData } from "../../../types/UserData.js";
 import { errorResponser } from "../utils/err-responser.js";
 
 export const jwtMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader && authHeader.split(" ")[1];
-
-	if (!token) {
-		throw { name: "EmptyAuthToken" };
-	}
-
 	try {
+		const authHeader = req.headers["authorization"];
+		const token = authHeader && authHeader.split(" ")[1];
+		if (!token) {
+			throw { name: "EmptyAuthToken" };
+		}
+
 		const decode = await decodeJwt(token!);
 		req.user = decode as UserData;
 
