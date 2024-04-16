@@ -5,7 +5,7 @@ export const todoIdValidators = Joi.object({
 });
 
 export const todoListValidators = Joi.object({
-	todoId: Joi.string().required(),
+	userId: Joi.string().required(),
 	isComplete: Joi.boolean().required(),
 });
 
