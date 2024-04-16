@@ -6,8 +6,8 @@ import { errorResponser } from "../utils/err-responser.js";
 
 export const todoIndexController = async (req: Request, res: Response) => {
 	try {
-		const { userId } = await userIdValidation.validateAsync({ userId: req.user.userId });
-		const todos = await todoIndexService(userId);
+		const { userId, isComplete } = await userIdValidation.validateAsync({ userId: req.user.userId, isComplete: req.body.isComplete });
+		const todos = await todoIndexService(userId, isComplete);
 
 		res.status(201).json({
 			status: true,

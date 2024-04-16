@@ -4,6 +4,11 @@ export const todoIdValidators = Joi.object({
 	todoId: Joi.string().required(),
 });
 
+export const todoListValidators = Joi.object({
+	todoId: Joi.string().required(),
+	isComplete: Joi.boolean().required(),
+});
+
 export const todoCreateValidators = Joi.object({
 	title: Joi.string().min(3).max(20).lowercase().required(),
 	description: Joi.string().min(3).max(150),

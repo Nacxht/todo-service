@@ -1,8 +1,8 @@
 import { Todo } from "../models/todo.js";
 
-export const todoIndexService = async (userId: string) => {
+export const todoIndexService = async (userId: string, isComplete: boolean) => {
 	try {
-		const data = await Todo.find({ userId });
+		const data = await Todo.find({ userId, isComplete });
 		return data;
 	} catch (err) {
 		throw err;
