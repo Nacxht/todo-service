@@ -38,7 +38,7 @@ export const todoCreateController = async (req: Request, res: Response) => {
 
 export const todoDeleteController = async (req: Request, res: Response) => {
 	try {
-		const { todoId } = await todoIdValidators.validateAsync(req.body);
+		const { todoId } = await todoIdValidators.validateAsync(req.params);
 		await todoDeleteService(todoId);
 
 		res.status(201).json({
@@ -53,7 +53,7 @@ export const todoDeleteController = async (req: Request, res: Response) => {
 
 export const todoUpdateController = async (req: Request, res: Response) => {
 	try {
-		const { todoId, title, description, isComplete } = await todoUpdateValidators.validateAsync(req.body);
+		const { todoId, title, description, isComplete } = await todoUpdateValidators.validateAsync(Object.assign({}, req.body, req.params.todoId));
 		await todoUpdateService(todoId, title, description, isComplete);
 		res.status(201).json({
 			status: true,

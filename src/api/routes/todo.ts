@@ -9,5 +9,5 @@ todoRouter.use(jwtMiddleware);
 
 todoRouter.get("/", todoIndexController);
 todoRouter.post("/create", todoCreateController);
-todoRouter.delete("/delete", todoDeleteController);
-todoRouter.patch("/update", todoUpdateController);
+todoRouter.delete("/delete/:todoId", todoDeleteController);
+todoRouter.patch("/update/:todoId", todoUpdateController);
